@@ -25,7 +25,7 @@ export default function Header() {
               Deep-Solve
             </h1>
             <p className="text-[10px] font-medium uppercase tracking-wider text-ink-300">
-              AI Math Tutor
+              22개정 수학 튜터
             </p>
           </div>
         </div>

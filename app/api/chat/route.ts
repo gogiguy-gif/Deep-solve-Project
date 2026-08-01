@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { SYSTEM_PROMPT } from "@/lib/system-prompt";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -11,12 +12,7 @@ interface IncomingMessage {
 }
 
 interface ChatRequestBody {
-  messages: IncomingMessage[];
-  system?: string;
-}
-
-const SYSTEM_DEFAULT =
-  "You are Deep-Solve, an AI math tutor for high school students. Explain step by step. Use LaTeX for all math: $inline$ and $$display$$. When giving multiple choice, use ① ② ③ ④ ⑤.";
+  messages: IncomingMessage[];}
 
 function encodeResult(text: string) {
   return `data: ${JSON.stringify({ text })}\n\n`;
@@ -33,7 +29,7 @@ export async function POST(req: NextRequest) {
       try {
         const body = (await req.json()) as ChatRequestBody;
         const messages = body.messages ?? [];
-        const system = body.system ?? SYSTEM_DEFAULT;
+        const system = SYSTEM_PROMPT;
 
         const apiKey = process.env.GEMINI_API_KEY;
         if (!apiKey) {

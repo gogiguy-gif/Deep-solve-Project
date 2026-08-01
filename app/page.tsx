@@ -22,21 +22,11 @@ interface Choice {
   text: string;
 }
 
-const SYSTEM_PROMPT = `You are Deep-Solve, an AI math tutor for high school students. Your job is to guide students toward understanding, not just hand them answers.
-
-Guidelines:
-- Use LaTeX for ALL math expressions. Inline math with $...$ and display math with $$...$$.
-- Explain concepts step by step in clear, simple Korean (unless the student writes in English).
-- When you present multiple-choice options, format them EXACTLY as: ①, ②, ③, ④, ⑤ each on its own line, followed by the option text.
-- Encourage the student and ask guiding questions when they seem stuck.
-- Be concise. Use short paragraphs and bullet points.
-- If a photo is provided, first identify the problem, then walk through the solution.`;
-
 const WELCOME: Message = {
   id: "welcome",
   role: "assistant",
   content:
-    "안녕! **Deep-Solve**야. 📐\n\n수학 문제가 막히거나 개념이 헷갈릴 때 언제든 도와줄게.\n\n- 문제 사진을 올려도 되고\n- 직접 타이핑해도 돼\n\n오늘은 어떤 문제로 도움이 필요해?",
+    "**Deep-Solve v8.0** · 22개정 교육과정 수학 AI 튜터\n\n문제를 직접 입력하거나 사진을 올려줘.\n\n힌트로 스스로 풀어보거나, 해설을 바로 보거나 — 널 선택해. 🎯",
 };
 
 function uid() {
@@ -108,7 +98,6 @@ export default function ChatPage() {
                 content: m.content,
                 image: m.image,
               })),
-            system: SYSTEM_PROMPT,
           }),
         });
 
